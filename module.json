@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "Sibyl.planning",
-  "version": "0.1.0-rc.2",
+  "version": "0.1.0-rc.3",
   "name": "Planung",
   "description": "Faire Primär-/Sekundär-/Tertiär-Rotation mit voneinander unabhängigen Slot-Zählern.",
   "type": "feature",
@@ -19,7 +19,7 @@
     },
     {
       "id": "Sibyl.ad",
-      "version": ">=0.1.0-rc.2"
+      "version": ">=0.1.0-rc.3"
     }
   ],
   "configurationSchema": "config.schema.json",

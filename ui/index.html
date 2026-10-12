@@ -1,39 +1,12 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sibyl · Planung</title><style>
-:root{color-scheme:light dark;font:15px/1.6 system-ui,sans-serif}body{max-width:1020px;padding:22px;margin:25px auto}a{color:inherit}
-header{display:flex;align-items:center;justify-content:space-between}textarea,input,button{font:inherit;padding:10px;border:1px solid #888}
-textarea{width:100%;min-height:100px}label{display:block;margin:14px 0}button{cursor:pointer}table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid #888;text-align:left;padding:8px}#results{max-height:450px;overflow:auto}.sub{opacity:.7}
-</style></head><body><header><h1>Planung</h1><a href="/">← Sibyl System</a></header><p class="sub">Fachlicher Teststand: unabhängige, faire Rotation für Primär-, Sekundär- und einen weiteren Slot. Die vollständige produktive Planung mit AD-Azubis, Blockplänen, Praktika und dauerhafter Speicherung folgt mit der Backend-Worker-Schnittstelle.</p>
-<label>Personen (eine pro Zeile)<textarea id="people">Alex
-Kim
-Sam
-Taylor</textarea></label><label>Anzahl der Runden <input type="number" id="turns" value="12" min="1" max="100"></label>
-<button id="calculate">Fairen Plan berechnen</button><p id="status" role="status"></p><div id="results"></div>
-<script>
-"use strict";
-document.getElementById("calculate").onclick=()=>{
- const status=document.getElementById("status"),target=document.getElementById("results");target.replaceChildren();
- try{
-  const names=document.getElementById("people").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
-  if(names.length<3||names.length>80||new Set(names).size!==names.length)throw Error("3 bis 80 eindeutige Personen eingeben");
-  const turns=Number(document.getElementById("turns").value);
-  if(!Number.isInteger(turns)||turns<1||turns>100)throw Error("1 bis 100 Runden eingeben");
-  const counts=Array.from({length:3},()=>new Array(names.length).fill(0)),cursor=[0,0,0];
-  const tbl=document.createElement("table"),tr=document.createElement("tr");
-  for(const v of ["Runde","Primär","Sekundär","Weiterer"]){const th=document.createElement("th");th.textContent=v;tr.append(th);}tbl.append(tr);
-  for(let turn=0;turn<turns;turn++){
-   const excluded=new Set(),row=[String(turn+1)];
-   for(let slot=0;slot<3;slot++){
-    let min=Infinity;for(let i=0;i<names.length;i++)if(!excluded.has(i))min=Math.min(min,counts[slot][i]);
-    let chosen=-1;for(let step=0;step<names.length;step++){
-     const j=(cursor[slot]+step)%names.length;
-     if(!excluded.has(j)&&counts[slot][j]===min){chosen=j;break;}
-    }
-    excluded.add(chosen);counts[slot][chosen]++;cursor[slot]=(chosen+1)%names.length;row.push(names[chosen]);
-   }
-   const record=document.createElement("tr");for(const value of row){const td=document.createElement("td");td.textContent=value;record.append(td);}tbl.append(record);
-  }
-  target.append(tbl);status.textContent=turns+" Runden erstellt. Pro Runde höchstens ein Slot je Person.";
- }catch(ex){status.textContent="Fehler: "+ex.message;}
-};
-document.getElementById("calculate").click();
-</script></body></html>
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sibyl · Planung</title><link rel="stylesheet" href="planning.css"><script defer src="bridge.js"></script><script defer src="planning.js"></script></head><body>
+<header><div><small>AUSBILDUNGSORGANISATION</small><h1>Planung</h1><p>Individuelle Pläne, Schulblöcke und Praktika</p></div><button class="primary" id="new">+ Neuer Plan</button></header>
+<nav class="tabs"><button data-tab="plans" class="active">Pläne</button><button data-tab="blocks">Schulblöcke</button><button data-tab="practicums">Praktika</button></nav>
+<section id="plans"><div class="layout"><aside class="panel"><h2>Meine Pläne</h2><div id="plans-list"></div></aside><main class="panel">
+<label>Planname<input id="name" maxlength="120" value="Dreier-Rotation"></label><div class="row"><label>Beginn<input id="start" type="date"></label><label>Intervall<select id="interval"><option value="1">Täglich</option><option value="7" selected>Wöchentlich</option><option value="14">Alle 2 Wochen</option></select></label></div>
+<label>Teilnehmende (eine Person pro Zeile)<textarea id="participants" rows="7" placeholder="Azubi A&#10;Azubi B&#10;Azubi C&#10;Azubi D"></textarea></label>
+<div class="row"><label>Anzahl der Runden<input id="turns" type="number" min="1" max="100" value="12"></label><label>Bezeichnung der Gruppe<input id="group" value="FI2a" maxlength="80"></label></div>
+<div class="buttons"><button id="generate" class="primary">Fairen Plan berechnen</button><button id="save">Plan speichern</button><button id="archive">Archivieren</button><button id="export">CSV exportieren</button></div><p id="status" role="status"></p><div class="table"><table><thead><tr><th>Datum</th><th>Primär</th><th>Sekundär</th><th>Weiterer</th></tr></thead><tbody id="assignments"></tbody></table></div></main></div></section>
+<section id="blocks" hidden><div class="panel"><h2>Schulblöcke</h2><p>Schulblöcke zentral für dein Konto dokumentieren.</p><div class="row"><label>Startdatum<input id="block-start" type="date"></label><label>Enddatum<input id="block-end" type="date"></label></div><label>Klasse / Beschreibung<input id="block-title" maxlength="160"></label><button id="block-add" class="primary">Schulblock speichern</button><div id="block-list"></div></div></section>
+<section id="practicums" hidden><div class="panel"><h2>Praktika</h2><div class="row"><label>Startdatum<input id="practice-start" type="date"></label><label>Enddatum<input id="practice-end" type="date"></label></div><label>Person<input id="practice-user" maxlength="100"></label><label>Unternehmen / Ort<input id="practice-place" maxlength="160"></label><button id="practice-add" class="primary">Praktikum speichern</button><div id="practice-list"></div></div></section>
+<footer>Berechnungen erfolgen unabhängig je Slotart. Ein Teilnehmer erhält pro Runde nur einen Slot. Automatischer AD-Azubiimport und gemeinsame Firmenpläne benötigen den späteren AD-Broker.</footer>
+</body></html>

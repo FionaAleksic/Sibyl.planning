@@ -9,7 +9,7 @@ import java.util.Set;
 /** Independent per-slot round-robin; a user can hold at most one role per turn. */
 public final class FairRotation {
     public static final String MODULE_ID = "Sibyl.planning";
-    public static final String VERSION = "0.1.0-rc.2";
+    public static final String VERSION = "0.1.0-rc.3";
     public record Assignment(String primary, String secondary, String tertiary) {}
     private FairRotation() {}
 
