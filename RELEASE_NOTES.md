@@ -1,3 +1,3 @@
-# First planning prerelease
+# Sibyl.planning v0.1.0-rc.2
 
-Independent three-slot fair round-robin engine, regression checks and validated Java 21 ZIP. UI, persistence and AD adapter pending Core addon runtime.
+Addon-eigener `deployment.json`-Plan und eigenständige UI für faire Drei-Slot-Rotation. AD v0.1.0-rc.3 wird als Dependency benötigt. Noch kein permanenter Plan, AD-Azubi-Sync oder vollständiger Niko-Planungsbildschirm.

@@ -1,0 +1,39 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sibyl · Planung</title><style>
+:root{color-scheme:light dark;font:15px/1.6 system-ui,sans-serif}body{max-width:1020px;padding:22px;margin:25px auto}a{color:inherit}
+header{display:flex;align-items:center;justify-content:space-between}textarea,input,button{font:inherit;padding:10px;border:1px solid #888}
+textarea{width:100%;min-height:100px}label{display:block;margin:14px 0}button{cursor:pointer}table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid #888;text-align:left;padding:8px}#results{max-height:450px;overflow:auto}.sub{opacity:.7}
+</style></head><body><header><h1>Planung</h1><a href="/">← Sibyl System</a></header><p class="sub">Fachlicher Teststand: unabhängige, faire Rotation für Primär-, Sekundär- und einen weiteren Slot. Die vollständige produktive Planung mit AD-Azubis, Blockplänen, Praktika und dauerhafter Speicherung folgt mit der Backend-Worker-Schnittstelle.</p>
+<label>Personen (eine pro Zeile)<textarea id="people">Alex
+Kim
+Sam
+Taylor</textarea></label><label>Anzahl der Runden <input type="number" id="turns" value="12" min="1" max="100"></label>
+<button id="calculate">Fairen Plan berechnen</button><p id="status" role="status"></p><div id="results"></div>
+<script>
+"use strict";
+document.getElementById("calculate").onclick=()=>{
+ const status=document.getElementById("status"),target=document.getElementById("results");target.replaceChildren();
+ try{
+  const names=document.getElementById("people").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  if(names.length<3||names.length>80||new Set(names).size!==names.length)throw Error("3 bis 80 eindeutige Personen eingeben");
+  const turns=Number(document.getElementById("turns").value);
+  if(!Number.isInteger(turns)||turns<1||turns>100)throw Error("1 bis 100 Runden eingeben");
+  const counts=Array.from({length:3},()=>new Array(names.length).fill(0)),cursor=[0,0,0];
+  const tbl=document.createElement("table"),tr=document.createElement("tr");
+  for(const v of ["Runde","Primär","Sekundär","Weiterer"]){const th=document.createElement("th");th.textContent=v;tr.append(th);}tbl.append(tr);
+  for(let turn=0;turn<turns;turn++){
+   const excluded=new Set(),row=[String(turn+1)];
+   for(let slot=0;slot<3;slot++){
+    let min=Infinity;for(let i=0;i<names.length;i++)if(!excluded.has(i))min=Math.min(min,counts[slot][i]);
+    let chosen=-1;for(let step=0;step<names.length;step++){
+     const j=(cursor[slot]+step)%names.length;
+     if(!excluded.has(j)&&counts[slot][j]===min){chosen=j;break;}
+    }
+    excluded.add(chosen);counts[slot][chosen]++;cursor[slot]=(chosen+1)%names.length;row.push(names[chosen]);
+   }
+   const record=document.createElement("tr");for(const value of row){const td=document.createElement("td");td.textContent=value;record.append(td);}tbl.append(record);
+  }
+  target.append(tbl);status.textContent=turns+" Runden erstellt. Pro Runde höchstens ein Slot je Person.";
+ }catch(ex){status.textContent="Fehler: "+ex.message;}
+};
+document.getElementById("calculate").click();
+</script></body></html>
