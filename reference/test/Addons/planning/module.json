@@ -1,0 +1,19 @@
+{
+  "kind": "module",
+  "type": "feature",
+  "id": "Sibyl.planning",
+  "name": "Planung",
+  "version": "1.0.1",
+  "description": "Dienst- und Aufgabenplanung wie im Produktivsystem mit unveraendertem Rotationsalgorithmus.",
+  "dependencies": [
+    "Sibyl.ad"
+  ],
+  "frontend": {
+    "entry": "frontend/module.js",
+    "navLabel": "Pläne"
+  },
+  "backend": {
+    "jar": "backend/niko-planning.jar",
+    "providerClass": "niko.planning.PlanningModule"
+  }
+}

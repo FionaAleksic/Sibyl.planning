@@ -1,0 +1,112 @@
+/* Scoped rendition of PROD planning area from /var/www/niko/styles.css. */
+.niko-planning{
+ --np-bg:var(--bg,#101318);--np-surface:var(--surface,#171b21);
+ --np-surface2:var(--surface-2,#222831);--np-border:var(--border,#343b45);
+ --np-text:var(--text,#eceef2);--np-muted:var(--muted,#9da5b2);
+ --np-accent:var(--accent,#6477b4);
+ width:100%;min-height:calc(100vh - 64px);background:var(--np-bg);
+ color:var(--np-text);padding:26px 34px 70px;font:14px/1.5 "Segoe UI",Arial,sans-serif;
+}
+.uploaded-module:has(.niko-planning){max-width:1440px;margin:0 auto}
+.niko-planning *, .niko-planning *:before {box-sizing:border-box}
+.niko-planning button,.niko-planning input,.niko-planning select,.niko-planning textarea{font:inherit}
+.niko-planning button{cursor:pointer}
+.niko-planning button:disabled{opacity:.45;cursor:not-allowed}
+.niko-planning [hidden]{display:none!important}
+.niko-planning .planning-header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-bottom:18px;border-bottom:1px solid var(--np-border);margin-bottom:18px}
+.niko-planning .planning-eyebrow{color:var(--np-muted);text-transform:uppercase;font-size:11px;letter-spacing:.08em;font-weight:700}
+.niko-planning h1{font-size:28px;line-height:1.2;margin:0;font-weight:700}
+.niko-planning h2{margin:0 0 8px;font-size:21px}
+.niko-planning h3{font-size:16px}
+.niko-planning .planning-admin-actions,.niko-planning .planning-detail-actions{display:flex;flex-wrap:wrap;gap:8px}
+.niko-planning .button{
+ border:1px solid var(--np-accent);background:var(--np-accent);color:var(--accent-text,#fff);
+ font-weight:650;min-height:34px;padding:6px 12px;border-radius:0;
+}
+.niko-planning .button.secondary{background:var(--np-surface);border-color:var(--border-strong,var(--np-border));color:var(--np-text)}
+.niko-planning .button.danger{background:var(--np-surface);border-color:var(--danger,#e76366);color:var(--danger,#e76366)}
+.niko-planning .button:hover:not(:disabled){filter:brightness(1.12)}
+.niko-planning .planning-tabs{display:flex;align-items:stretch;border-bottom:1px solid var(--np-border);gap:0;margin:18px 0;overflow-x:auto}
+.niko-planning .planning-tab{
+ background:transparent;color:var(--np-muted);border:0;border-top:1px solid var(--np-border);
+ border-right:1px solid var(--np-border);min-height:38px;
+ padding:7px 13px;white-space:nowrap;font-weight:650;
+}
+.niko-planning .planning-tab:first-child{border-left:1px solid var(--np-border)}
+.niko-planning .planning-tab:hover{color:var(--np-text);background:var(--np-surface2)}
+.niko-planning .planning-tab.active{color:var(--np-text);background:var(--np-surface2)}
+.niko-planning .planning-split{display:grid;grid-template-columns:330px minmax(0,1fr);align-items:start;gap:18px}
+.niko-planning .planning-list-panel{background:var(--np-surface);border:1px solid var(--np-border);padding:14px}
+.niko-planning .planning-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px}
+.niko-planning .planning-panel-head h2{font-size:18px;margin:0}
+.niko-planning .planning-count{border:1px solid var(--np-border);padding:0 6px;font-size:11px;color:var(--np-muted)}
+.niko-planning .planning-list-item{
+ text-align:left;display:block;width:100%;border:0;border-bottom:1px solid var(--np-border);
+ background:transparent;color:var(--np-text);padding:12px 10px;
+}
+.niko-planning .planning-list-item.active{background:var(--np-surface2);box-shadow:inset 3px 0 var(--np-accent)}
+.niko-planning .planning-list-item:hover{background:var(--np-surface2)}
+.niko-planning .planning-list-item strong,.niko-planning .planning-list-item small{display:block}
+.niko-planning .planning-list-item strong{font-size:13px}
+.niko-planning .planning-list-item small{font-size:11px;color:var(--np-muted);margin-top:3px}
+.niko-planning .planning-detail{min-width:0;background:var(--np-surface);border:1px solid var(--np-border);padding:18px}
+.niko-planning .planning-empty{padding:45px 10px;text-align:center;color:var(--np-muted)}
+.niko-planning .planning-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding-bottom:16px;border-bottom:1px solid var(--np-border)}
+.niko-planning .planning-detail-head h2{margin:0 0 5px}
+.niko-planning .planning-detail-head p{font-size:12px;color:var(--np-muted);margin:0}
+.niko-planning .planning-summary{margin:16px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px}
+.niko-planning .planning-summary>div{padding:9px 10px;border:1px solid var(--np-border);background:var(--np-surface2)}
+.niko-planning .planning-summary span,.niko-planning .planning-summary strong{display:block}
+.niko-planning .planning-summary span{color:var(--np-muted);font-size:11px;margin-bottom:5px}
+.niko-planning .planning-summary strong{font-size:12px;overflow-wrap:anywhere}
+.niko-planning .planning-table-wrap{max-width:100%;overflow:auto}
+.niko-planning .planning-table{width:100%;border-collapse:collapse;font-size:13px}
+.niko-planning .planning-table th,.niko-planning .planning-table td{border:1px solid var(--np-border);padding:10px 9px;min-width:105px;text-align:left;vertical-align:top}
+.niko-planning .planning-table th{background:var(--np-surface2);font-weight:650}
+.niko-planning .planning-table small{display:block;font-size:11px;color:var(--np-muted);font-weight:400}
+.niko-planning .planning-table tr.planning-current td{background:color-mix(in srgb,var(--np-accent) 16%,var(--np-surface))}
+.niko-planning .planning-table .closed-slot{color:var(--np-muted)}
+.niko-planning .planning-table .empty-slot{color:var(--danger,#e76366)}
+.niko-planning .planning-table .manual-slot{border-left:3px solid var(--np-accent)}
+.niko-planning .planning-table .editable-slot{cursor:pointer}
+.niko-planning .planning-table .editable-slot:hover{background:var(--np-surface2)}
+.niko-planning .planning-slot-priority{
+ display:inline-block;color:var(--np-muted);border:1px solid var(--np-border);
+ border-radius:2px;padding:1px 5px;margin-top:3px;font-size:10px!important
+}
+.niko-planning .planning-slot-priority-primary{color:#75c49c}
+.niko-planning .planning-slot-priority-secondary{color:#f0bf70}
+.niko-planning .planning-slot-priority-tertiary{color:#c49ed9}
+.niko-planning .planning-past-title{margin:30px 0 8px;font-size:15px}
+.niko-planning .planning-log{margin-top:20px;border-top:1px solid var(--np-border)}
+.niko-planning .planning-log summary{cursor:pointer}
+.niko-planning .planning-log pre{max-height:360px;overflow:auto;background:var(--np-bg);padding:12px;white-space:pre-wrap;font-size:12px}
+.niko-planning .planning-valid{color:#77c9a1}.niko-planning .planning-outdated{color:#ff9a93}
+.niko-planning .planning-notice{border:1px solid var(--np-border);background:var(--np-surface2);padding:12px;margin:12px 0;color:var(--np-muted)}
+.niko-planning .planning-error{border:1px solid var(--danger,#e76366);color:var(--danger,#e76366);padding:12px;margin:12px 0}
+.niko-planning .planning-dialog-backdrop{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:16px}
+.niko-planning .planning-dialog{background:var(--np-surface);border:1px solid var(--np-border);padding:24px;max-width:750px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 15px 50px #0008}
+.niko-planning .planning-dialog h2{margin:0 0 18px}
+.niko-planning .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.niko-planning .form-grid .span-2{grid-column:span 2}
+.niko-planning .form-grid label,.niko-planning .form-grid fieldset{min-width:0}
+.niko-planning .field-label{display:block;font-size:12px;color:var(--np-muted);margin-bottom:4px}
+.niko-planning input:not([type=checkbox]):not([type=radio]),.niko-planning select,.niko-planning textarea{
+ background:var(--np-bg);color:var(--np-text);border:1px solid var(--np-border);padding:8px 9px;max-width:100%;width:100%;
+}
+.niko-planning input[type=checkbox]{accent-color:var(--np-accent)}
+.niko-planning .form-fieldset{border:1px solid var(--np-border);padding:8px 12px}
+.niko-planning .check-row{display:flex;align-items:center;gap:6px;font-size:13px;margin:8px 0}
+.niko-planning .check-row input{width:auto}
+.niko-planning .planning-slot-priority-editor{display:grid;gap:5px;margin-top:6px}
+.niko-planning .planning-slot-tier{display:grid;grid-template-columns:135px minmax(0,1fr);align-items:start;gap:12px;padding:10px 0;border-bottom:1px solid var(--np-border)}
+.niko-planning .planning-slot-tier-name{display:grid;gap:2px}
+.niko-planning .planning-slot-tier-name small{font-size:11px;color:var(--np-muted)}
+.niko-planning .planning-slot-checks{display:flex;flex-wrap:wrap;gap:8px 15px}
+.niko-planning .planning-slot-check{margin:2px 0;white-space:nowrap}
+.niko-planning .interval-row{display:flex;gap:6px}
+.niko-planning .interval-row input{max-width:92px}
+.niko-planning .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:22px;flex-wrap:wrap}
+.niko-planning .planning-json-preview{background:var(--np-bg);padding:12px;border:1px solid var(--np-border);white-space:pre-wrap;max-height:220px;overflow:auto}
+@media(max-width:960px){.niko-planning{padding:18px}.niko-planning .planning-split{grid-template-columns:1fr}.niko-planning .planning-list-panel{max-height:260px;overflow:auto}}
+@media(max-width:600px){.niko-planning .planning-header,.niko-planning .planning-detail-head{display:block}.niko-planning .planning-admin-actions,.niko-planning .planning-detail-actions{margin-top:12px}.niko-planning .form-grid{grid-template-columns:1fr}.niko-planning .form-grid .span-2{grid-column:span 1}.niko-planning .planning-dialog{padding:16px}}
