@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "Sibyl.planning",
+  "version": "0.1.0-rc.1",
+  "name": "Planung",
+  "description": "Faire Primär-/Sekundär-/Tertiär-Rotation mit voneinander unabhängigen Slot-Zählern.",
+  "type": "feature",
+  "runtime": "java21-jar",
+  "entrypoint": "org.sibyl.addons.planning.FairRotation",
+  "apiCompatibility": ">=0.1.0 <1.0.0",
+  "capabilities": [
+    "planning.slots.generate",
+    "planning.fairness.verify"
+  ],
+  "requires": [
+    {
+      "id": "Sibyl.core",
+      "version": ">=0.1.0"
+    },
+    {
+      "id": "Sibyl.ad",
+      "version": ">=0.1.0-rc.1"
+    }
+  ],
+  "configurationSchema": "config.schema.json",
+  "repository": "FionaAleksic/Sibyl.planning",
+  "releaseChannel": "prerelease",
+  "license": "MIT"
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "slotLabels": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "const": "Primär"
+        },
+        {
+          "const": "Sekundär"
+        },
+        {
+          "const": "Tertiär"
+        }
+      ],
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "maxPlanningTurns": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000,
+      "default": 500
+    },
+    "useAdRoster": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
